@@ -7,7 +7,6 @@ output: html_document
 We set up the directory to access the PUMS data file. 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "")
 getwd()
 load("acs2017_ny_data.RData")
 acs2017_ny[1:10,1:7]
