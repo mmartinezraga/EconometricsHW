@@ -44,5 +44,43 @@ For the purpose of exploring interesting statistics in the data, we wanted to fi
 educ_indx <- factor((educ_nohs + 2*educ_hs + 3*educ_somecoll + 4*educ_college + 5*educ_advdeg), levels=c(1,2,3,4,5),labels = c("No HS","HS","SmColl","Bach","Adv"))
 table(educ_indx,female)
 ```
+## Question #5
+```{r}
+library(readr)
+S_P <- read_csv("S&P.csv")
+```
+```{r}
+summary(S_P)
+```
+```{r}
+S_P$Return <- with(S_P, Close - Open)
+summary(S_P)
+```
+```{r}
+S_P$PreviousReturn <- 0
+S_P$PreviousReturn <- "null"
+```
 
-
+```{r}
+for (row in 1:dim(S_P)[1]) {
+  if (S_P$Return[row] > 0) {
+    if (row+1 <= dim(S_P)) {
+      S_P$PreviousReturn[row+1] <- "positive"
+    
+    }
+  } else {
+    if (row+1 <= dim(S_P)) {
+      S_P$PreviousReturn[row+1] <- "negative"
+    }
+  }
+}
+```
+```{r}
+summary(S_P[S_P$PreviousReturn == "positive", ]$Return)
+```
+```{r}
+summary(S_P[S_P$PreviousReturn == "negative", ]$Return)
+```
+```{r}
+S_P$PreviousTwoDayReturn <- "null"
+```
